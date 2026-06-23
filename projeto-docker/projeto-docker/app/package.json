@@ -1,0 +1,12 @@
+{
+  "name": "so-app",
+  "version": "1.0.0",
+  "description": "Aplicacao para disciplina de Sistemas Operacionais",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

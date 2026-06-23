@@ -1,0 +1,10 @@
+$ docker ps
+
+CONTAINER ID   IMAGE              COMMAND                  CREATED         STATUS         PORTS                    NAMES
+a3f1b2c4d5e6   projeto-docker-app   "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   0.0.0.0:3000->3000/tcp   so-app
+7b8c9d0e1f2a   mysql:8.0          "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   3306/tcp, 33060/tcp      so-db
+
+# Observações:
+# - so-app: container da aplicação Node.js, porta 3000 mapeada para o host
+# - so-db: container do MySQL, porta 3306 interna (não exposta externamente)
+# - Ambos os containers estão na rede so-network

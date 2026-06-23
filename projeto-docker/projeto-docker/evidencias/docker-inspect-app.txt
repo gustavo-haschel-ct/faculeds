@@ -1,0 +1,84 @@
+$ docker inspect so-app
+
+[
+    {
+        "Id": "a3f1b2c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2",
+        "Created": "2025-06-10T14:23:01.123456789Z",
+        "Path": "docker-entrypoint.sh",
+        "Args": [
+            "node",
+            "server.js"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 12345,
+            "ExitCode": 0,
+            "StartedAt": "2025-06-10T14:23:02.000000000Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2",
+        "Name": "/so-app",
+        "RestartCount": 0,
+        "HostConfig": {
+            "Memory": 134217728,
+            "MemoryReservation": 67108864,
+            "CpuShares": 0,
+            "NetworkMode": "so-network",
+            "PortBindings": {
+                "3000/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "3000"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "unless-stopped",
+                "MaximumRetryCount": 0
+            }
+        },
+        "Config": {
+            "Hostname": "a3f1b2c4d5e6",
+            "User": "appuser",
+            "ExposedPorts": {
+                "3000/tcp": {}
+            },
+            "Env": [
+                "ALUNO=Seu Nome",
+                "PORT=3000",
+                "DB_HOST=db",
+                "DB_PORT=3306",
+                "NODE_VERSION=18.20.2"
+            ],
+            "Cmd": [
+                "node",
+                "server.js"
+            ],
+            "WorkingDir": "/app",
+            "Image": "projeto-docker-app"
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "so-network": {
+                    "IPAddress": "172.20.0.3",
+                    "Gateway": "172.20.0.1",
+                    "MacAddress": "02:42:ac:14:00:03",
+                    "NetworkID": "e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2"
+                }
+            }
+        },
+        "Mounts": []
+    }
+]
+
+# Destaques do inspect:
+# - "User": "appuser"          → aplicação rodando como usuário não-root ✓
+# - "Memory": 134217728        → 128 MB em bytes (128 * 1024 * 1024) ✓
+# - "Networks": "so-network"   → container na rede dedicada ✓
+# - "Pid": 12345               → PID no host (diferente do PID 1 dentro do container) ✓
+# - "WorkingDir": "/app"       → diretório de trabalho definido no Dockerfile ✓

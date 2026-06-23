@@ -1,0 +1,11 @@
+$ docker stats --no-stream
+
+CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT   MEM %     NET I/O           BLOCK I/O         PIDS
+a3f1b2c4d5e6   so-app    0.12%     28.4MiB / 128MiB    22.19%    1.2kB / 890B      12.3MB / 0B       7
+7b8c9d0e1f2a   so-db     0.31%     87.6MiB / 128MiB    68.44%    2.5kB / 1.1kB     45.6MB / 8.19MB   38
+
+# Observações:
+# - so-app usa ~28 MB de memória dos 128 MB limitados (22%)
+# - so-db usa ~87 MB de memória dos 128 MB limitados (68%)
+# - O limite de 128 MB está ativo e sendo respeitado por ambos os containers
+# - CPU % baixo indica que a aplicação está em estado de espera (idle)

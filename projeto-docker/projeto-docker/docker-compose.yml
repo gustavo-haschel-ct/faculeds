@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+
+  # ─── Serviço da Aplicação Web (Node.js) ─────────────────────────────────────
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: so-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - ALUNO=Seu Nome
+      - PORT=3000
+      - DB_HOST=db
+      - DB_PORT=3306
+    networks:
+      - so-network
+    depends_on:
+      - db
+    deploy:
+      resources:
+        limits:
+          memory: 128M        # Limite de memória de 128 MB (requisito obrigatório)
+        reservations:
+          memory: 64M
+
+  # ─── Serviço de Banco de Dados (MySQL) ──────────────────────────────────────
+  db:
+    image: mysql:8.0
+    container_name: so-db
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=soapp
+      - MYSQL_USER=appuser
+      - MYSQL_PASSWORD=apppassword
+    volumes:
+      - so-db-data:/var/lib/mysql   # Volume persistente para os dados
+    networks:
+      - so-network
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 64M
+
+# ─── Rede Docker Dedicada ────────────────────────────────────────────────────
+networks:
+  so-network:
+    driver: bridge
+    name: so-network
+
+# ─── Volume Persistente ──────────────────────────────────────────────────────
+volumes:
+  so-db-data:
+    name: so-db-data

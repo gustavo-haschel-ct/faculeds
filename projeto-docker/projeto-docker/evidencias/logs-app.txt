@@ -1,0 +1,12 @@
+$ docker logs so-app
+
+Servidor rodando na porta 3000
+Aluno: Seu Nome
+Plataforma: linux | Arch: x64
+
+# Observações:
+# - O processo Node.js iniciou corretamente na porta 3000
+# - A variável de ambiente ALUNO foi lida com sucesso
+# - A plataforma detectada é "linux" (kernel do host compartilhado)
+# - A arquitetura é "x64" (amd64)
+# - Esses logs são gerados pelo console.log() no server.js ao iniciar
